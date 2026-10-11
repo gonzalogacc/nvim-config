@@ -1,7 +1,8 @@
 # Neovim config
 
 A small, modular Neovim config using [lazy.nvim](https://github.com/folke/lazy.nvim),
-Telescope + fzf for VS Code–style file finding and searching, and Tree-sitter for C/C++.
+Telescope + fzf for VS Code–style file finding and searching, a file tree sidebar,
+and Tree-sitter for C/C++.
 
 ## Requirements
 
@@ -38,6 +39,7 @@ lua/config/options.lua      editor options (indent, splits, search)
 lua/config/keymaps.lua      general keymaps (splits, window movement, search)
 lua/config/lazy.lua         bootstraps lazy.nvim, loads lua/plugins/*
 lua/plugins/telescope.lua   Telescope + fzf-native and its keymaps
+lua/plugins/nvim-tree.lua   file tree sidebar
 lua/plugins/treesitter.lua  Tree-sitter highlighting/indent for C/C++
 ```
 
@@ -87,6 +89,31 @@ needs extended keys enabled (see [tmux](#tmux)).
 | `Esc` | Clear search highlighting |
 
 Searches ignore case unless you type a capital letter.
+
+### File tree
+
+Run `nvim .` (or `nvim some/dir`) to open with the tree on the left. The tree
+follows and highlights the file you're editing.
+
+| Key | Action |
+|---|---|
+| `Space e` | Show / hide the tree |
+| `Space E` | Reveal the current file in the tree |
+| `Ctrl+h` / `Ctrl+l` | Jump between the tree and the file |
+
+Inside the tree:
+
+| Key | Action |
+|---|---|
+| `Enter` | Open file / expand folder |
+| `Ctrl+v` / `Ctrl+x` | Open in a side / bottom split |
+| `a` | New file (end the name with `/` for a folder) |
+| `r` | Rename |
+| `d` | Delete |
+| `x` / `c` / `p` | Cut / copy / paste |
+| `H` | Show / hide dotfiles |
+| `R` | Refresh |
+| `g?` | Show all tree keys |
 
 ### Splits & windows
 

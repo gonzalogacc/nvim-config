@@ -24,6 +24,19 @@ Esc                      close
 n / N                    next / previous match
 Esc                      clear highlight
 
+── FILE TREE ───────────────────────────────────
+nvim .                   open with tree on the left
+Space e                  show / hide tree
+Space E                  reveal current file
+Enter                    open file / folder
+Ctrl+v / Ctrl+x          open in side / bottom split
+a                        new file (name/ = folder)
+r                        rename
+d                        delete
+x / c / p                cut / copy / paste
+H                        show / hide dotfiles
+g?                       all tree keys
+
 ── SPLITS ──────────────────────────────────────
 Space v                  split left | right
 Space s                  split top / bottom

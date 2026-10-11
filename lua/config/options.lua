@@ -11,3 +11,7 @@ vim.opt.splitbelow = true
 -- Search: case-insensitive unless the query has a capital letter
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
+
+-- Disable netrw (built-in file explorer); nvim-tree replaces it
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
