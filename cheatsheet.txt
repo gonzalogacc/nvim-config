@@ -25,7 +25,7 @@ n / N                    next / previous match
 Esc                      clear highlight
 
 ── FILE TREE ───────────────────────────────────
-nvim .                   open with tree on the left
+nvim  /  nvim .          open with tree on the left
 Space e                  show / hide tree
 Space E                  reveal current file
 Enter                    open file / folder

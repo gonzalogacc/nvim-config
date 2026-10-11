@@ -92,7 +92,7 @@ Searches ignore case unless you type a capital letter.
 
 ### File tree
 
-Run `nvim .` (or `nvim some/dir`) to open with the tree on the left. The tree
+Run `nvim`, `nvim .` or `nvim some/dir` to open with the tree on the left. The tree
 follows and highlights the file you're editing.
 
 | Key | Action |
