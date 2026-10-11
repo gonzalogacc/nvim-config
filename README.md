@@ -46,6 +46,7 @@ To add a plugin, create a new file in `lua/plugins/` that returns a lazy.nvim sp
 ## Shortcuts
 
 The leader key is **Space**. Press `Space fk` inside Neovim to search all keymaps.
+For a short printable version, see [`cheatsheet.txt`](cheatsheet.txt).
 
 ### Find files & search
 

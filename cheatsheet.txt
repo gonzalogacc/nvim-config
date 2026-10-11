@@ -1,0 +1,38 @@
+NEOVIM CHEAT SHEET              (leader = Space)
+
+── TELESCOPE: FIND ─────────────────────────────
+Ctrl+P / Space ff        find files
+Ctrl+Shift+F / Space fg  search text in all files
+Space Space              switch open files
+Space /                  search in current file
+Space fw                 search word under cursor
+Space f.                 reopen last search
+Space fr                 recent files
+Space fd                 errors / warnings
+Space fk                 search keymaps
+
+── INSIDE TELESCOPE ────────────────────────────
+Ctrl+n / Ctrl+p          next / previous result
+Enter                    open
+Ctrl+v                   open in side split
+Ctrl+x                   open in bottom split
+Ctrl+q                   send results to quickfix
+Esc                      close
+
+── SEARCH IN FILE ──────────────────────────────
+/text                    search
+n / N                    next / previous match
+Esc                      clear highlight
+
+── SPLITS ──────────────────────────────────────
+Space v                  split left | right
+Space s                  split top / bottom
+Space q                  close window
+Space =                  equal sizes
+Ctrl+arrows              resize
+
+── MOVE BETWEEN WINDOWS ────────────────────────
+Ctrl+h                   left
+Ctrl+j                   down
+Ctrl+k                   up
+Ctrl+l                   right
