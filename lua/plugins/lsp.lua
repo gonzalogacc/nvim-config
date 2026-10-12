@@ -33,8 +33,8 @@ return {
       vim.api.nvim_create_autocmd("LspAttach", {
         group = vim.api.nvim_create_augroup("UserLspConfig", { clear = true }),
         callback = function(event)
-          local map = function(keys, func, desc)
-            vim.keymap.set("n", keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
+          local map = function(keys, func, desc, mode)
+            vim.keymap.set(mode or "n", keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
           end
 
           -- Jump to definition / references
@@ -55,9 +55,20 @@ return {
           map("K", vim.lsp.buf.hover, "Hover documentation")
           map("<C-k>", vim.lsp.buf.signature_help, "Signature help")
 
-          -- Refactoring & Actions
-          map("<leader>rn", vim.lsp.buf.rename, "Rename symbol")
+          -- Refactoring & Actions: VS Code style Quick Fix & Import (Cmd+. / Ctrl+. / Space .)
+          map("<D-.>", vim.lsp.buf.code_action, "Quick fix / import menu")
+          map("<C-.>", vim.lsp.buf.code_action, "Quick fix / import menu")
+          map("<M-.>", vim.lsp.buf.code_action, "Quick fix / import menu")
+          map("<leader>.", vim.lsp.buf.code_action, "Quick fix / import menu")
           map("<leader>ca", vim.lsp.buf.code_action, "Code action")
+
+          -- Insert mode shortcuts for Quick Fix / Import
+          map("<D-.>", vim.lsp.buf.code_action, "Quick fix / import menu", "i")
+          map("<C-.>", vim.lsp.buf.code_action, "Quick fix / import menu", "i")
+          map("<M-.>", vim.lsp.buf.code_action, "Quick fix / import menu", "i")
+
+          -- Rename symbol
+          map("<leader>rn", vim.lsp.buf.rename, "Rename symbol")
 
           -- Diagnostic jumps
           map("[d", vim.diagnostic.goto_prev, "Previous diagnostic")
@@ -83,13 +94,15 @@ return {
       })
 
       -- Neovim 0.11 native LSP configuration
-      vim.lsp.config("pyright", {
+      vim.lsp.config("basedpyright", {
         settings = {
-          python = {
+          basedpyright = {
             analysis = {
               autoSearchPaths = true,
               useLibraryCodeForTypes = true,
-              diagnosticMode = "workspace",
+              diagnosticMode = "openFilesOnly",
+              autoImportCompletions = true,
+              typeCheckingMode = "standard", -- standard VS Code behavior
             },
           },
         },
@@ -106,7 +119,7 @@ return {
       })
 
       -- Enable servers
-      vim.lsp.enable("pyright")
+      vim.lsp.enable("basedpyright")
       vim.lsp.enable("clangd")
       vim.lsp.enable("lua_ls")
     end,
