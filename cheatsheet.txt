@@ -29,10 +29,13 @@ K                        hover docs / type info
 Ctrl+k                   signature help
 Ctrl+o / Ctrl+i          jump back / forward in jump list
 Space rn                 rename symbol
-Ctrl+. / Space .         import symbol / quick fix (VS Code Cmd+.)
+Space .                  import symbol / quick fix (VS Code Cmd+.)
 Space ca                 code action menu
 [d / ]d                  previous / next error/warning
 Space cd                 show line error / warning details
+Tab / Enter              accept completion (insert mode, adds import)
+Ctrl+n / Ctrl+p          next / previous completion item
+Ctrl+Space               open completion menu
 
 
 ── SEARCH IN FILE ──────────────────────────────

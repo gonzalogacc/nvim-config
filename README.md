@@ -96,11 +96,14 @@ needs extended keys enabled (see [tmux](#tmux)).
 | `K` | Hover documentation / signatures |
 | `Ctrl+k` | Signature help |
 | `Ctrl+o` / `Ctrl+i` | Jump backward / forward in jump list |
-| `Ctrl+.` / `Cmd+.` / `Space .` | Import symbol / quick fix menu (like VS Code) |
+| `Space .` | Import symbol / quick fix menu (like VS Code Cmd+.) |
 | `Space ca` | Code action menu |
 | `Space rn` | Rename symbol across project |
 | `[d` / `]d` | Previous / next diagnostic error or warning |
 | `Space cd` | Show diagnostics float for current line |
+| `Tab` / `Enter` | Accept completion in insert mode (adds the import if needed) |
+| `Ctrl+n` / `Ctrl+p` | Next / previous completion item |
+| `Ctrl+Space` | Open completion menu |
 
 
 ### Search within a file

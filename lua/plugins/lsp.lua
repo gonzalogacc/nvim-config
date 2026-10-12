@@ -33,9 +33,26 @@ return {
       vim.api.nvim_create_autocmd("LspAttach", {
         group = vim.api.nvim_create_augroup("UserLspConfig", { clear = true }),
         callback = function(event)
-          local map = function(keys, func, desc, mode)
-            vim.keymap.set(mode or "n", keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
+          local map = function(keys, func, desc, mode, expr)
+            vim.keymap.set(mode or "n", keys, func, { buffer = event.buf, desc = "LSP: " .. desc, expr = expr })
           end
+
+          -- Native completion. Accepting an auto-import item also inserts its import line.
+          local client = vim.lsp.get_client_by_id(event.data.client_id)
+          -- Servers only list "." and similar as trigger characters. Adding identifier characters opens the menu while typing a name.
+          if client and client:supports_method("textDocument/completion") then
+            local triggers = client.server_capabilities.completionProvider.triggerCharacters or {}
+            for c in ("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_"):gmatch(".") do
+              table.insert(triggers, c)
+            end
+            client.server_capabilities.completionProvider.triggerCharacters = triggers
+            vim.lsp.completion.enable(true, client.id, event.buf, { autotrigger = true })
+          end
+
+          -- VS Code style menu keys: Tab or Enter accepts, Ctrl+Space opens the menu.
+          map("<Tab>", function() return vim.fn.pumvisible() == 1 and "<C-y>" or "<Tab>" end, "Accept completion", "i", true)
+          map("<CR>", function() return vim.fn.pumvisible() == 1 and vim.fn.complete_info({ "selected" }).selected ~= -1 and "<C-y>" or "<CR>" end, "Accept completion", "i", true)
+          map("<C-Space>", vim.lsp.completion.get, "Open completion menu", "i")
 
           -- Jump to definition / references
           map("gd", vim.lsp.buf.definition, "Go to definition")
@@ -55,17 +72,9 @@ return {
           map("K", vim.lsp.buf.hover, "Hover documentation")
           map("<C-k>", vim.lsp.buf.signature_help, "Signature help")
 
-          -- Refactoring & Actions: VS Code style Quick Fix & Import (Cmd+. / Ctrl+. / Space .)
-          map("<D-.>", vim.lsp.buf.code_action, "Quick fix / import menu")
-          map("<C-.>", vim.lsp.buf.code_action, "Quick fix / import menu")
-          map("<M-.>", vim.lsp.buf.code_action, "Quick fix / import menu")
+          -- Quick fix / import menu
           map("<leader>.", vim.lsp.buf.code_action, "Quick fix / import menu")
           map("<leader>ca", vim.lsp.buf.code_action, "Code action")
-
-          -- Insert mode shortcuts for Quick Fix / Import
-          map("<D-.>", vim.lsp.buf.code_action, "Quick fix / import menu", "i")
-          map("<C-.>", vim.lsp.buf.code_action, "Quick fix / import menu", "i")
-          map("<M-.>", vim.lsp.buf.code_action, "Quick fix / import menu", "i")
 
           -- Rename symbol
           map("<leader>rn", vim.lsp.buf.rename, "Rename symbol")
@@ -94,18 +103,15 @@ return {
       })
 
       -- Neovim 0.11 native LSP configuration
-      vim.lsp.config("basedpyright", {
-        settings = {
-          basedpyright = {
-            analysis = {
-              autoSearchPaths = true,
-              useLibraryCodeForTypes = true,
-              diagnosticMode = "openFilesOnly",
-              autoImportCompletions = true,
-              typeCheckingMode = "standard", -- standard VS Code behavior
-            },
-          },
-        },
+      -- ty finds <project root>/.venv by itself (uv default). It supplies type diagnostics,
+      -- auto-import completion, and "import X" quick fixes for undefined names.
+      -- Ruff supplies lint and import sorting only. ty supplies hover documentation.
+      vim.lsp.config("ruff", {
+        -- ty already reports undefined names (F821).
+        init_options = { settings = { lint = { ignore = { "F821" } } } },
+        on_attach = function(client)
+          client.server_capabilities.hoverProvider = false
+        end,
       })
 
       vim.lsp.config("lua_ls", {
@@ -119,7 +125,8 @@ return {
       })
 
       -- Enable servers
-      vim.lsp.enable("basedpyright")
+      vim.lsp.enable("ty")
+      vim.lsp.enable("ruff")
       vim.lsp.enable("clangd")
       vim.lsp.enable("lua_ls")
     end,

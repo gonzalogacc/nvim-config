@@ -23,3 +23,5 @@ vim.g.loaded_netrwPlugin = 1
 -- Enable 24-bit true colors for colorschemes
 vim.opt.termguicolors = true
 
+-- "noinsert" preselects the first item but does not insert it until it is accepted.
+vim.opt.completeopt = { "menuone", "noinsert", "popup", "fuzzy" }
