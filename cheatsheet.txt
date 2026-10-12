@@ -19,6 +19,21 @@ Ctrl+x                   open in bottom split
 Ctrl+q                   send results to quickfix
 Esc                      close
 
+── CODE NAVIGATION (LSP) ───────────────────────
+gd                       go to definition
+gD                       go to declaration
+gi                       go to implementation
+gr                       find references (Telescope)
+gy                       go to type definition
+K                        hover docs / type info
+Ctrl+k                   signature help
+Ctrl+o / Ctrl+i          jump back / forward in jump list
+Space rn                 rename symbol
+Space ca                 code action / quick fix
+[d / ]d                  previous / next error/warning
+Space cd                 show line error / warning details
+
+
 ── SEARCH IN FILE ──────────────────────────────
 /text                    search
 n / N                    next / previous match

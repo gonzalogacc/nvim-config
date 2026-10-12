@@ -1,16 +1,28 @@
 return {
   "nvim-treesitter/nvim-treesitter",
-  branch = "main",
+  branch = "master",
   lazy = false,
   build = ":TSUpdate",
   config = function()
-    -- Enable Tree-sitter highlighting and indentation for C & C++
-    vim.api.nvim_create_autocmd("FileType", {
-      pattern = { "c", "cpp" },
-      callback = function(args)
-        vim.treesitter.start(args.buf)
-        vim.bo[args.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-      end,
+    require("nvim-treesitter.configs").setup({
+      ensure_installed = {
+        "python",
+        "lua",
+        "c",
+        "cpp",
+        "vim",
+        "vimdoc",
+        "markdown",
+        "markdown_inline",
+      },
+      auto_install = true,
+      highlight = {
+        enable = true,
+        additional_vim_regex_highlighting = false,
+      },
+      indent = {
+        enable = true,
+      },
     })
   end,
 }

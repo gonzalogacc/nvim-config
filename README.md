@@ -2,13 +2,15 @@
 
 A small, modular Neovim config using [lazy.nvim](https://github.com/folke/lazy.nvim),
 Telescope + fzf for VS Code–style file finding and searching, a file tree sidebar,
-and Tree-sitter for C/C++.
+Tree-sitter highlighting, LSP code navigation (Python, C/C++, Lua), and the
+Gruvbox colorscheme (hard contrast, deuteranomaly-friendly).
 
 ## Requirements
 
 - Neovim 0.11+ (tested on 0.12)
-- `git`, `make`, `gcc` (to build telescope-fzf-native)
+- `git`, `make`, `gcc` (to build telescope-fzf-native and treesitter parsers)
 - [ripgrep](https://github.com/BurntSushi/ripgrep) for searching text across files
+- `node` & `npm` (for language servers like Pyright)
 - Optional: `fd` for faster file finding
 
 On Ubuntu/Debian:
@@ -38,9 +40,11 @@ init.lua                    leader key + loads the modules below
 lua/config/options.lua      editor options (indent, splits, search)
 lua/config/keymaps.lua      general keymaps (splits, window movement, search)
 lua/config/lazy.lua         bootstraps lazy.nvim, loads lua/plugins/*
+lua/plugins/colorscheme.lua Gruvbox theme (hard contrast, accessible diagnostics)
+lua/plugins/lsp.lua         LSP setup (Pyright, Clangd, Lua) + Mason
 lua/plugins/telescope.lua   Telescope + fzf-native and its keymaps
 lua/plugins/nvim-tree.lua   file tree sidebar
-lua/plugins/treesitter.lua  Tree-sitter highlighting/indent for C/C++
+lua/plugins/treesitter.lua  Tree-sitter highlighting/indent for Python, C/C++, Lua, etc.
 ```
 
 To add a plugin, create a new file in `lua/plugins/` that returns a lazy.nvim spec.
@@ -79,6 +83,24 @@ needs extended keys enabled (see [tmux](#tmux)).
 | `Ctrl+v` / `Ctrl+x` | Open in a side / bottom split |
 | `Ctrl+q` | Send all results to the quickfix list |
 | `Esc` | Close |
+
+### Code navigation (LSP)
+
+| Key | Action |
+|---|---|
+| `gd` | Go to definition |
+| `gD` | Go to declaration |
+| `gi` | Go to implementation |
+| `gr` | Find references (opens Telescope) |
+| `gy` | Go to type definition |
+| `K` | Hover documentation / signatures |
+| `Ctrl+k` | Signature help |
+| `Ctrl+o` / `Ctrl+i` | Jump backward / forward in jump list |
+| `Space rn` | Rename symbol across project |
+| `Space ca` | Code action / quick fix |
+| `[d` / `]d` | Previous / next diagnostic error or warning |
+| `Space cd` | Show diagnostics float for current line |
+
 
 ### Search within a file
 
