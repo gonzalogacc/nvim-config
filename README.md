@@ -125,7 +125,7 @@ follows and highlights the file you're editing.
 |---|---|
 | `Space e` | Show / hide the tree |
 | `Space E` | Reveal the current file in the tree |
-| `Ctrl+h` / `Ctrl+l` | Jump between the tree and the file |
+| `Space h` / `Space l` | Jump between the tree and the file |
 
 Inside the tree:
 
@@ -148,7 +148,8 @@ Inside the tree:
 | `Space v` | Split left/right |
 | `Space s` | Split top/bottom |
 | `Space q` | Close the current window |
-| `Ctrl+h/j/k/l` | Move to the window left/down/up/right |
+| `Space h` / `Space l` | Move to window left / right |
+| `Ctrl+j` / `Ctrl+k` | Move to window down / up |
 | `Ctrl+arrow keys` | Resize the current window |
 | `Space =` | Make all splits the same size |
 

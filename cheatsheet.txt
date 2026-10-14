@@ -64,7 +64,7 @@ Space =                  equal sizes
 Ctrl+arrows              resize
 
 ── MOVE BETWEEN WINDOWS ────────────────────────
-Ctrl+h                   left
+Space h                  left
+Space l                  right
 Ctrl+j                   down
 Ctrl+k                   up
-Ctrl+l                   right
