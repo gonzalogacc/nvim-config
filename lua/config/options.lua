@@ -8,6 +8,9 @@ vim.opt.expandtab = true   -- Convert tabs into spaces
 vim.opt.number = true
 vim.opt.relativenumber = true
 
+-- Gutter grows to 3 sign columns: diagnostics, diff with main, uncommitted changes.
+vim.opt.signcolumn = "auto:1-3"
+
 -- Splits open to the right / below (like VS Code)
 vim.opt.splitright = true
 vim.opt.splitbelow = true

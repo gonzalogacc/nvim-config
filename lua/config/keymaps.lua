@@ -27,3 +27,7 @@ map("n", "<leader>=", "<C-w>=", { desc = "Equalize splits" })
 map("n", "<Esc>", "<cmd>nohlsearch<CR>", { desc = "Clear search highlight" })
 map("n", "n", "nzzzv", { desc = "Next match (centered)" })
 map("n", "N", "Nzzzv", { desc = "Prev match (centered)" })
+
+-- Jump list navigation, like browser back / forward
+map("n", "<leader>[", "<C-o>", { desc = "Jump back" })
+map("n", "<leader>]", "<C-i>", { desc = "Jump forward" })

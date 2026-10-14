@@ -33,6 +33,11 @@ return {
         DiagnosticUnderlineWarn  = { undercurl = true, sp = "#fabd2f" },
         DiagnosticUnderlineInfo  = { undercurl = true, sp = "#83a598" },
         DiagnosticUnderlineHint  = { undercurl = true, sp = "#d3869b" },
+        -- Symbol under cursor: background plus shape, so it does not depend on hue alone.
+        -- Write = places that assign the symbol.
+        LspReferenceText  = { bg = "#504945" },
+        LspReferenceRead  = { bg = "#504945" },
+        LspReferenceWrite = { bg = "#504945", underline = true, bold = true },
       },
     })
     vim.cmd("colorscheme gruvbox")

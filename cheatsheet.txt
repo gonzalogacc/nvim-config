@@ -27,7 +27,8 @@ gr                       find references (Telescope)
 gy                       go to type definition
 K                        hover docs / type info
 Ctrl+k                   signature help
-Ctrl+o / Ctrl+i          jump back / forward in jump list
+Space [ / Space ]        jump back / forward (like browser back)
+Ctrl+o / Ctrl+i          jump back / forward (Vim default)
 Space rn                 rename symbol
 Space .                  import symbol / quick fix (VS Code Cmd+.)
 Space ca                 code action menu
@@ -36,6 +37,17 @@ Space cd                 show line error / warning details
 Tab / Enter              accept completion (insert mode, adds import)
 Ctrl+n / Ctrl+p          next / previous completion item
 Ctrl+Space               open completion menu
+
+
+── GIT ─────────────────────────────────────────
+│ (right)                line differs from main
+┃ / ┋ (left)             not staged / staged, not committed
+]h / [h                  next / previous change vs main
+]c / [c                  next / previous uncommitted change
+Space gd                 diff with main inline (toggle)
+Space gp                 preview uncommitted change
+Space gs / Space gr      stage / discard change under cursor
+Space gb                 blame line
 
 
 ── SEARCH IN FILE ──────────────────────────────
