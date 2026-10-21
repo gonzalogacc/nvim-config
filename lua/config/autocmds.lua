@@ -36,3 +36,25 @@ vim.api.nvim_create_autocmd({ "CursorMoved", "InsertEnter", "BufLeave" }, {
   group = group,
   callback = clear,
 })
+
+-- Reloads a buffer when its file changes on disk.
+-- 'autoread' only acts when Neovim runs :checktime, so these events trigger it.
+-- A buffer with unsaved changes is not reloaded. Neovim asks what to do instead.
+vim.opt.autoread = true
+
+local reload_group = vim.api.nvim_create_augroup("UserAutoReload", { clear = true })
+
+vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "CursorHold", "CursorHoldI", "TermLeave" }, {
+  group = reload_group,
+  callback = function()
+    -- :checktime is not permitted in the command-line window.
+    if vim.fn.getcmdwintype() == "" then vim.cmd("checktime") end
+  end,
+})
+
+vim.api.nvim_create_autocmd("FileChangedShellPost", {
+  group = reload_group,
+  callback = function(args)
+    vim.notify("Reloaded from disk: " .. vim.fn.fnamemodify(args.file, ":~:."), vim.log.levels.INFO)
+  end,
+})
