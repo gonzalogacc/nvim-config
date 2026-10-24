@@ -18,7 +18,12 @@ return {
     { "<leader>fb", "<cmd>Telescope buffers<CR>", desc = "Buffers" },
     { "<leader>fh", "<cmd>Telescope help_tags<CR>", desc = "Help tags" },
     { "<leader>fr", "<cmd>Telescope oldfiles<CR>", desc = "Recent files" },
-    { "<leader><leader>", "<cmd>Telescope buffers<CR>", desc = "Switch buffer" },
+    -- Live grep pre-filled with the word under the cursor (still editable)
+    {
+      "<leader><leader>",
+      function() require("telescope.builtin").live_grep({ default_text = vim.fn.expand("<cword>") }) end,
+      desc = "Live grep word under cursor",
+    },
     { "<leader>/", "<cmd>Telescope current_buffer_fuzzy_find<CR>", desc = "Search in current file" },
     { "<leader>fw", "<cmd>Telescope grep_string<CR>", desc = "Search word under cursor" },
     { "<leader>fd", "<cmd>Telescope diagnostics<CR>", desc = "Diagnostics" },
