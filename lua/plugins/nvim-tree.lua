@@ -34,18 +34,14 @@ return {
     -- Make the current-file line clearly visible in the tree
     vim.api.nvim_set_hl(0, "NvimTreeCursorLine", { link = "Visual" })
 
-    -- Open the tree on the side at startup for `nvim` (no args) and `nvim <dir>`
+    -- When starting with `nvim <dir>`, cd into it and open an empty buffer instead of the tree
     vim.api.nvim_create_autocmd("VimEnter", {
       callback = function(data)
-        local no_args = data.file == "" and vim.bo[data.buf].buftype == ""
-        local directory = vim.fn.isdirectory(data.file) == 1
-        if not no_args and not directory then return end
-        if directory then
+        if vim.fn.isdirectory(data.file) == 1 then
           vim.cmd.enew()
           vim.cmd.bw(data.buf)
           vim.cmd.cd(data.file)
         end
-        require("nvim-tree.api").tree.open()
       end,
     })
   end,
